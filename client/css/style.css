@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url('../fonts/OpenSans-Bold.ttf');
+    font-weight: 800;
+}
+@font-face { /*Regular*/
+    font-family: "OpenSans";
+    src: url('../fonts/OpenSans-Regular.ttf');
+    font-weight: 500;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: url('../fonts/OpenSans-Light.ttf');
+    font-weight: 300;
+}
+
+html, body {
+    font-family: 'OpenSans', Roboto, monospace;
+    background-color: #eeeee4;
+    overflow: hidden;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+}
+
+nav {
+    position: relative;
+    height: 52px;
+    padding: 5px 16px;
+    background-color: black;
+}
+
+.container-fluid {
+    display: flex;
+}
+
+.logo-container {
+    min-width: 400px;
+}
+
+.logo-image {
+    height: 52px;
+    background-color: #eeeee4;
+    border-radius: 50%;
+}
+
+.logo-title {
+    text-decoration: none;
+    color: #eeeee4;
+    font-size: 1.2em;
+    line-height: 52px;
+    vertical-align: top;
+}
+
+.login-msg {
+    flex-grow: 1;
+    color: #eeeee4;
+    width: auto;
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    
+}
+
+.login-title {
+    color: #eeeee4;
+    margin: 0 2em 0 0;
+    text-transform: capitalize;
+}
+
+.login-button{
+    display: inline-block;
+    padding: 0.4em 1em;
+    font-size: 14px;
+    color: #333333;
+    background-color: white;
+    border-radius: 4px;
+
+}
