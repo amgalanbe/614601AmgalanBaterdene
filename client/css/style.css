@@ -58,7 +58,7 @@ nav {
 
 .login-msg {
     flex-grow: 1;
-    color: #eeeee4;
+    color: red;
     width: auto;
     text-align: center;
 }
@@ -116,7 +116,7 @@ input {
     width: 80px;   
 }
 
-#place-order {
+#placeOrderBtn {
     position: absolute;
     right: 10%;
     width: 20%;
@@ -131,11 +131,11 @@ input {
     
 }
 
-#place-order:hover {
+#placeOrderBtn:hover {
     background: linear-gradient(rgb(85, 155, 240), rgb(32, 115, 216));
     border-width: 1px;
 }
 
-#place-order:active {
+#placeOrderBtn:active {
     background: rgb(32, 115, 216);
 }

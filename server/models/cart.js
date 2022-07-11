@@ -52,12 +52,12 @@ class Cart {
         if(index > -1) {
             const item = this.items[index];
             item.quantity--;
-            if(item.quantity == 0) 
+            if(item.quantity <= 0) 
                 this.items = this.items.filter(i=>i.productId !== prodId);
             return item;
+        } else {
+            throw new Error('Item NOT found');
         }
-
-        return null;
     }
 
     findItemById(prodId) {

@@ -9,6 +9,7 @@ window.onload = function(){
     if(token) {
         document.getElementById('loginMsg').innerHTML = 'Welcome, ' + token.split('-')[1] + '!';
         document.getElementById('logoutBtn').onclick = logout;
+        document.getElementById('placeOrderBtn').onclick = placeOrder;
         download();
     } else {
         redirectToLogin()
@@ -43,9 +44,8 @@ async function fetchProducts(){
         if(json.error) {
             postErrorMsg(json.error);
         } else {
-            sessionStorage.setItem('products', json);
             products = json;
-            products.forEach(p=>renderProduct(p));
+            populateProducts();
         }
     } else {
         postErrorMsg('HTTP error ' + response.status);
@@ -120,19 +120,19 @@ async function removeCartItem(prodId) {
             if(item) {
                 const index = cartItems.findIndex(i => i.productId === item.productId);
                 if(index > -1) {
-                    if(item.quantity === 0) {
-                        cartItems = cartItems.filter(i => i.productId !== item.productId);
-                        populateCartTable();
-                    } else {
+                    if(item.quantity > 0) {
                         cartItems[index].quantity = json.quantity;
                         updateCartItem(cartItems[index]);
+                    } else {
+                        cartItems = cartItems.filter(i => i.productId !== item.productId);
+                        populateCartTable();
                     }
                     
                 } else {
-                    console.log('item not found from cartItems when removing');
+                    postErrorMsg('item not found from cartItems when removing');
                 }
             } else {
-                console.log('item returned null when calling remove item');
+                postErrorMsg('item returned null when calling remove item');
             }
         }
     } else {
@@ -140,8 +140,33 @@ async function removeCartItem(prodId) {
     }
 }
 
+async function placeOrder(){
+    const response = await fetch(serverUrl + '/api/orders/placeOrder', {
+        method: 'POST',
+        headers: {            
+            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+    });
+
+    if(response.ok) {
+        const json = await response.json();  
+        if(json.error)
+            postErrorMsg(json.error);
+        else {
+            products = json;
+            populateProducts();
+            cartItems = [];
+            populateCartTable()
+        }
+    } else {
+        postErrorMsg('HTTP error ' + response.status);
+    }
+}
+
 function addToCart() {
-    addCartItem(this.id);
+    if(this.stock > 0) {
+        addCartItem(this.id);
+    }
 }
 
 function removeFromCart() {
@@ -150,6 +175,13 @@ function removeFromCart() {
 
 function postErrorMsg(msg) {
     document.getElementById('errorMsg').innerHTML = msg;
+}
+
+function populateProducts() {
+    document.getElementById('product-list').innerHTML = '';
+    if(products.length > 0) {
+        products.forEach(p=>renderProduct(p));
+    }
 }
 
 function renderProduct(product) {

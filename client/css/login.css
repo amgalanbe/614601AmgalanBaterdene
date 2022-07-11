@@ -60,7 +60,7 @@ nav {
 
 .login-msg {
     flex-grow: 1;
-    color: #eeeee4;
+    color: red;
     width: auto;
     text-align: center;
 }

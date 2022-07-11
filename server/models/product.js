@@ -50,7 +50,6 @@ class Product {
         } else {
             throw new Error('NOT Found');
         }
-
     }
 
     static getProducts() {
@@ -62,7 +61,6 @@ class Product {
         if (index > -1) {
             return products[index];
         } else {
-            console.log("throwing error " + productId);
             throw new Error('NOT Found');
         }
     }

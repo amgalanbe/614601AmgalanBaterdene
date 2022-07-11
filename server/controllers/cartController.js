@@ -19,10 +19,10 @@ exports.addItem = (req, res) => {
         item = cart.addItem(product.id);
     }
     res.status(200).json(item);
-}
+};
 
 exports.removeItem = (req, res) => {
     const cart = Cart.getCart(req.user);
     const item = cart.removeItem(req.body.productId);
     res.status(200).json(item);
-}
+};

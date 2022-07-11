@@ -5,6 +5,7 @@ const path = require('path');
 const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
 const cartRouter = require('./routes/cart');
+const orderRouter = require('./routes/order');
 
 const app = express();
 app.use(cors());
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+app.use('/api/orders', orderRouter);
 
 app.use((req, res, next) => {
     res.status(404).json({ error: req.url + ' API not supported!' });
